@@ -1,0 +1,5 @@
+plan: false
+
+vars:
+  service: payments-plugin-virtuemart
+  squad: juno

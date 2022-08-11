@@ -1,9 +1,7 @@
 # Joomla VirtueMart plugin for Lunar
 
-This plugin is *not* developed or maintained by Lunar but kindly made
-available by a user.
+The software is provided “as is”, without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement.
 
-Released under the GNU V2 license: http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
 
 ## Supported VirtueMart versions
 

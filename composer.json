@@ -1,0 +1,11 @@
+{
+  "name": "lunar/plugin-virtuemart",
+  "description": "Lunar payment gateway for Virtuemart",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ionut Calara",
+      "email": "ionut.calara@gmail.com"
+    }
+  ]
+}

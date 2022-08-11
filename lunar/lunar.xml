@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension version="2.5" type="plugin" group="vmpayment" method="upgrade">
+    <name>VM - Payment, Lunar</name>
+    <creationDate>April 2022</creationDate>
+    <author>Lunar</author>
+    <authorUrl>https://lunar.app</authorUrl>
+    <copyright>Copyright (C) 2022 Lunar. All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <version>1.0.0</version>
+    <description><![CDATA[<a href="http://lunar.app" target="_blank">Lunar</a> is a popular
+  payment provider. ]]>
+    </description>
+    <!-- Include plugin files and folders -->
+    <files>
+        <filename plugin="lunar">lunar.php</filename>
+        <folder>assets</folder>
+        <folder>images</folder>
+        <folder>language</folder>
+        <folder>lib</folder>
+        <folder>tmpl</folder>
+    </files>
+    <!-- Admin Settings Fields -->
+    <vmconfig>
+        <fields name="params">
+            <fieldset name="payment"  addfieldpath="/administrator/components/com_virtuemart/fields">
+				<field name="checkConditionsCore" value="1" default="1" type="hidden"/>
+                <field type="text" name="title" default="Credit Card (Lunar)" label="VMPAYMENT_LUNAR_TITLE"/>
+                <field name="active" type="list" default="1" label="VMPAYMENT_LUNAR_ACTIVE">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </field>
+                <field type="textarea" name="description" label="VMPAYMENT_LUNAR_DESCRIPTION"
+                       default="Secure payment with credit card via © Lunar" rows="5" cols="10"/>
+
+                <field name="test_mode" type="list" label="VMPAYMENT_TEST_MODE" default=""
+                       description="VMPAYMENT_TEST_MODE_DESCRIPTION">
+                    <option value="0">Live</option>
+                    <option value="1">Test</option>
+                </field>
+                <field type="text" name="live_api_key" label="VMPAYMENT_LUNAR_LIVE_MODE_API_KEY" default=""
+                       description="VMPAYMENT_LUNAR_MODE_DESCRIPTION"/>
+                <field type="text" name="live_public_key" label="VMPAYMENT_LUNAR_LIVE_MODE_PUBLIC_KEY" default=""
+                       description="VMPAYMENT_LUNAR_MODE_DESCRIPTION"/>
+
+                <field type="text" name="test_api_key" label="VMPAYMENT_LUNAR_TEST_MODE_API_KEY" default=""
+                       description="VMPAYMENT_LUNAR_MODE_DESCRIPTION"/>
+                <field type="text" name="test_public_key" label="VMPAYMENT_LUNAR_TEST_MODE_PUBLIC_KEY" default=""
+                       description="VMPAYMENT_LUNAR_MODE_DESCRIPTION"/>
+                <field type="text" name="popup_title" default="" label="VMPAYMENT_LUNAR_POPUP_TITLE"
+                       description="VMPAYMENT_LUNAR_POPUP_TITLE_DESCRIPTION"/>
+                <field type="list" name="checkout_mode" label="VMPAYMENT_LUNAR_CHECKOUT_MODE" default=""
+                       description="VMPAYMENT_LUNAR_CHECKOUT_MODE_DESCRIPTION">
+                    <option value="before">Payment before order created</option>
+                    <option value="after">Redirect to payment page after order created</option>
+                </field>
+                <field type="list" name="capture_mode" label="VMPAYMENT_LUNAR_CAPTURE_MODE" default=""
+                       description="VMPAYMENT_LUNAR_CAPTURE_MODE_DESCRIPTION">
+                    <option value="instant">Instant</option>
+                    <option value="delayed">Delayed</option>
+                </field>
+                <field type="vmacceptedcurrency" name="payment_currency" label="VMPAYMENT_LUNAR_CURRENCY" default=""
+                       description="VMPAYMENT_LUNAR_CURRENCY_DESCRIPTION"/>
+                <field name="email_currency" type="list" default="vendor" label="VMPAYMENT_LUNAR_EMAIL_CURRENCY"
+                       description="VMPAYMENT_LUNAR_EMAIL_CURRENCY_DESCRIPTION">
+                    <option value="vendor">VMPAYMENT_LUNAR_EMAIL_CURRENCY_VENDOR</option>
+                    <option value="payment">VMPAYMENT_LUNAR_EMAIL_CURRENCY_PAYMENT</option>
+                </field>
+				<!-- <field name="status_pending" type="vmorderstate" scope="com_virtuemart" default="U"
+                       label="VMPAYMENT_LUNAR_STATUS_PENDING" description="VMPAYMENT_LUNAR_STATUS_PENDING_TIP"/> -->
+                <field name="status_success" type="vmorderstate" scope="com_virtuemart" default="C"
+                       label="VMPAYMENT_LUNAR_STATUS_SUCCESS" description="VMPAYMENT_LUNAR_STATUS_SUCCESS_TIP"/>
+               <!-- <field name="status_ipn_success_updateable" type="vmorderstate" scope="com_virtuemart" default=""  multiple="true"
+                       label="VMPAYMENT_LUNAR_STATUS_UPDATEABLE" description="VMPAYMENT_LUNAR_STATUS_UPDATEABLE_TIP"/>
+                <field name="status_canceled" type="vmorderstate" scope="com_virtuemart" default="X"
+                       label="VMPAYMENT_LUNAR_STATUS_CANCEL" description="VMPAYMENT_LUNAR_STATUS_CANCEL_TIP"/> -->
+                <field class="Authorization" name="status_capture" type="vmorderstate" scope="com_virtuemart"
+                       default="S"
+                       label="VMPAYMENT_LUNAR_STATUS_CAPTURE" description="VMPAYMENT_LUNAR_STATUS_CAPTURE_TIP"/>
+                <field name="status_refunded" type="vmorderstate" scope="com_virtuemart" default="R"
+                       label="VMPAYMENT_LUNAR_STATUS_REFUND" description="VMPAYMENT_LUNAR_STATUS_REFUND_TIP"/>
+                <!-- <field name="status_partial_refunded" type="vmorderstate" scope="com_virtuemart" default="R"
+                       label="VMPAYMENT_LUNAR_STATUS_PARTIAL_REFUND"
+                       description="VMPAYMENT_LUNAR_STATUS_PARTIAL_REFUND_TIP"/> -->
+                <field name="status_denied" type="vmorderstate" scope="com_virtuemart" default="D"
+                       label="COM_VIRTUEMART_ORDER_STATUS_DENIED" description="COM_VIRTUEMART_ORDER_STATUS_DENIED_TIP"/>
+                <field type="list" name="card" label="VMPAYMENT_LUNAR_CARD" default="" multiple="multiple">
+                    <option value="mastercard">MasterCard</option>
+                    <option value="maestro">Maestro</option>
+                    <option value="visa">Visa</option>
+                    <option value="visaelectron">Visa Electron</option>
+                </field>
+                <field name="mastercard" type="filelist" hide_none="true" hide_default="true" directory='plugins/vmpayment/lunar/images/' label="VMPAYMENT_LUNAR_MASTERCARD_LOGO" description=""
+                       default="mastercard.svg"/>
+                <field name="maestro" type="filelist" hide_none="true" hide_default="true" directory='plugins/vmpayment/lunar/images/' label="VMPAYMENT_LUNAR_MAESTRO_LOGO" description=""
+                       default="maestro.svg"/>
+                <field name="visa" type="filelist" hide_none="true" hide_default="true" directory='plugins/vmpayment/lunar/images/' label="VMPAYMENT_LUNAR_VISA_LOGO" description=""
+                       default="visa.svg"/>
+                <field name="visaelectron" type="filelist" hide_none="true" hide_default="true" directory='plugins/vmpayment/lunar/images/' label="VMPAYMENT_LUNAR_VISAELECTRON_LOGO" description=""
+                       default="visaelectron.svg"/>
+            </fieldset>
+			<fieldset name="fee">
+                <field name="cost_per_transaction" type="text" label="VMPAYMENT_LUNAR_COST_PER_TRANSACTION"
+                       description="VMPAYMENT_LUNAR_COST_PER_TRANSACTION_TIP"/>
+                <field name="cost_min_transaction" type="text" label="VMPAYMENT_LUNAR_COST_MIN_TRANSACTION"
+                       description="VMPAYMENT_LUNAR_COST_MIN_TRANSACTION_TIP"/>
+                <field name="cost_percent_total" type="text" label="VMPAYMENT_LUNAR_COST_PERCENT_TOTAL"
+                       description="VMPAYMENT_LUNAR_COST_PERCENT_TOTAL_TIP"/>
+                <field name="tax_id" type="vmtaxes" scope="com_virtuemart" label="VMPAYMENT_LUNAR_TAX"
+                       description="VMPAYMENT_LUNAR_TAX_TIP"/>
+            </fieldset>
+			<fieldset name="option">
+		                <field name="min_amount" type="text" label="VMPAYMENT_LUNAR_MIN_AMOUNT"
+                       description="VMPAYMENT_LUNAR_MIN_AMOUNT_TIP"/>
+                <field name="max_amount" type="text" label="VMPAYMENT_LUNAR_MAX_AMOUNT"
+                       description="VMPAYMENT_LUNAR_MAX_AMOUNT_TIP"/>
+            </fieldset>
+        </fields>
+    </vmconfig>
+</extension>
